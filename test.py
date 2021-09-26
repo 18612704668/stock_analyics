@@ -72,6 +72,7 @@ def bs_k_data_stock(code_val='000651.sz',start_val='20090101',end_val='20190601'
     bs.logout()
     return df_recon
 '''
+'''
 import json
 stock_index = [{'指数':
                 {'上证指数':'sh.000001',
@@ -97,3 +98,12 @@ print(type(json_str))
 
 with open("stock_pool.json","w",encoding='utf-8') as f:
     json.dump(stock_index,f,ensure_ascii=False,indent=4)
+'''
+import pandas as pd
+import tushare as ts
+
+token = '3b490c6d1a57adc1bcde82ebb5aadfc4176c890f34611d3beec31666'    #输入你的口令
+pro = ts.pro_api(token)   #  初始化pro接口
+
+df = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+print(df.head())
